@@ -6,7 +6,6 @@ Copyright (C) 2010 Dariusz Suchojad <dsuch at gefira.pl>
 Licensed under LGPLv3, see LICENSE.txt for terms and conditions.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
 
 # stdlib
 import multiprocessing, os.path as path
@@ -20,6 +19,7 @@ from springpython.context import scope
 # sec-wall
 from secwall import server, wsse
 from secwall.core import version
+
 
 class SecWallContext(PythonConfig):
     """ A Spring Python's application context for sec-wall.
@@ -61,13 +61,13 @@ class SecWallContext(PythonConfig):
         """ Whether to start a plain HTTP (http) server or an SSL/TLS one (https).
         Defaults to 'http'.
         """
-        return 'http'
+        return "http"
 
     @Object
     def host(self):
         """ Host to bind to.
         """
-        return '0.0.0.0'
+        return "0.0.0.0"
 
     @Object
     def port(self):
@@ -85,53 +85,68 @@ class SecWallContext(PythonConfig):
     def crypto_dir(self):
         """ The base directory holding crypto material.
         """
-        return './crypto'
+        return "./crypto"
 
     @Object
     def keyfile(self):
         """ Location of the server's private key.
         """
-        return path.join(self.crypto_dir(), 'server-priv.pem')
+        return path.join(self.crypto_dir(), "server-priv.pem")
 
     @Object
     def certfile(self):
         """ Location of the server's certificate.
         """
-        return path.join(self.crypto_dir(), 'server-cert.pem')
+        return path.join(self.crypto_dir(), "server-cert.pem")
 
     @Object
     def ca_certs(self):
         """ Location of the file containing CAs the server is to trust.
         """
-        return path.join(self.crypto_dir(), 'ca-cert.pem')
+        return path.join(self.crypto_dir(), "ca-cert.pem")
 
     @Object
     def not_authorized(self):
         """ HTTP code, the content type and a user friendly description
         for 401 error.
         """
-        return ['401', 'Not Authorized', 'text/plain', str('You are not authorized to access this resource')]
+        return [
+            "401",
+            "Not Authorized",
+            "text/plain",
+            str("You are not authorized to access this resource"),
+        ]
 
     @Object
     def forbidden(self):
         """ HTTP code, the content type and a user friendly description
         for 403 error.
         """
-        return ['403', 'Forbidden', 'text/plain', str('You are not allowed to access this resource')]
+        return [
+            "403",
+            "Forbidden",
+            "text/plain",
+            str("You are not allowed to access this resource"),
+        ]
 
     @Object
     def no_url_match(self):
         """ HTTP code, the content type and a user friendly description
         for 404 error.
         """
-        return ['404', 'Not Found', 'text/plain', str('Not Found')]
+        return ["404", "Not Found", "text/plain", str("Not Found")]
 
     @Object
     def internal_server_error(self):
         """ HTTP code, the content type and a user friendly description
         for 500 error.
         """
-        return ['500', 'Internal Server Error', 'text/plain', str('Internal Server Error')]
+        return [
+            "500",
+            "Internal Server Error",
+            "text/plain",
+            str("Internal Server Error"),
+        ]
 
     @Object
     def validation_precedence(self):
@@ -139,7 +154,14 @@ class SecWallContext(PythonConfig):
         one configuration for the given URL, only one will be used and it will
         the one that is higher on this list (closer to index 0).
         """
-        return ['ssl-cert', 'basic-auth', 'digest-auth', 'wsse-pwd', 'custom-http', 'xpath']
+        return [
+            "ssl-cert",
+            "basic-auth",
+            "digest-auth",
+            "wsse-pwd",
+            "custom-http",
+            "xpath",
+        ]
 
     @Object
     def client_cert_401_www_auth(self):
@@ -158,13 +180,13 @@ class SecWallContext(PythonConfig):
         """ Syslog address, should be either b'/dev/log' or the UDP address
         such as ['127.0.0.1', 514].
         """
-        return b'/dev/log'
+        return b"/dev/log"
 
     @Object
     def log_level(self):
         """ The log level to use.
         """
-        return 'INFO'
+        return "INFO"
 
     @Object
     def log_file_config(self):
@@ -177,13 +199,13 @@ class SecWallContext(PythonConfig):
         """ How will sec-wall introduce itself to client and backend applications
         in HTTP headers.
         """
-        return 'sec-wall/{0}'.format(version)
+        return "sec-wall/{0}".format(version)
 
     @Object
     def instance_name(self):
         """ A human-friendly name of this particular sec-wall instance.
         """
-        return 'default'
+        return "default"
 
     @Object
     def quote_path_info(self):
@@ -204,7 +226,7 @@ class SecWallContext(PythonConfig):
         """ Headers belonging to this list will not be returned to the client
         application even if a backend sends them in.
         """
-        return ['Server']
+        return ["Server"]
 
     @Object
     def add_invocation_id(self):
@@ -228,14 +250,14 @@ class SecWallContext(PythonConfig):
         to invoke the URL.
         """
         return {
-            'ssl': True,
-            'ssl-cert': True,
-            'ssl-cert-commonName': uuid4().hex,
-            'host': 'http://{0}'.format(uuid4().hex),
-            'from-client-ignore': [],
-            'to-backend-add': {},
-            'from-backend-ignore': [],
-            'to-client-add': {}
+            "ssl": True,
+            "ssl-cert": True,
+            "ssl-cert-commonName": uuid4().hex,
+            "host": "http://{0}".format(uuid4().hex),
+            "from-client-ignore": [],
+            "to-backend-add": {},
+            "from-backend-ignore": [],
+            "to-client-add": {},
         }
 
     @Object

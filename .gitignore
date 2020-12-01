@@ -1,0 +1,15 @@
+# Forget these =P
+
+$RECYCLE.BIN/
+*.dat
+*.egg-info
+*.out
+*.pyc
+*~
+.DS_Store
+.coverage
+Desktop.ini
+Thumbs.db
+ehthumbs.db
+secrets.toml
+/var

@@ -1,0 +1,10 @@
+* About
+
+Port of the original security proxy sec-wall to python3.
+
+
+* License
+
+Original work LGPL-3.0. /See [[https://pypi.org/project/sec-wall/][https://pypi.org/project/sec-wall/]]./
+
+This distribution LGPL-3.0+.
